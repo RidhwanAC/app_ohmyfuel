@@ -19,9 +19,10 @@ class _HomePageState extends State<HomePage> {
   double cost = 0.00;
   String selectedFuel = 'Ron95';
 
-  bool emptyDistance = false;
-  bool emptyEfficiency = false;
-  bool zeroEfficiency = false;
+  bool emptyDistance = false; //show error message for empty distance field
+  bool emptyEfficiency = false; //show error message for empty efficiency field
+  bool zeroEfficiency =
+      false; //show error message for 0 efficiency, prevent divison by zero
 
   Map<String, double> fuelPrices = {
     'Ron95': 2.60,
@@ -123,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                             Text(
                                 (emptyEfficiency)
                                     ? 'Required field'
-                                    : 'Efficiency cannot be zero',
+                                    : 'Efficiency Cannot be Zero',
                                 style: const TextStyle(color: Colors.red)),
                           ],
                         ),
@@ -132,11 +133,14 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(height: 0.025 * pgHeight),
                     Row(
                       children: [
-                        Text(
-                          'Select Fuel: ',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 0.02 * pgHeight,
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0.01 * pgWidth, 0, 0, 0),
+                          child: Text(
+                            'Select Fuel: ',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 0.02 * pgHeight,
+                            ),
                           ),
                         ),
                         SizedBox(width: 0.025 * pgWidth),
@@ -145,7 +149,10 @@ class _HomePageState extends State<HomePage> {
                           items: fuelPrices.keys.map((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
-                              child: Text(value),
+                              child: Text(
+                                value,
+                                style: TextStyle(fontSize: 0.02 * pgHeight),
+                              ),
                             );
                           }).toList(),
                           onChanged: (String? newValue) {
@@ -184,7 +191,7 @@ class _HomePageState extends State<HomePage> {
                                 0.015 * pgHeight),
                           ),
                           child: Text(
-                            'Reset',
+                            'Clear',
                             style: TextStyle(fontSize: 0.02 * pgHeight),
                           ),
                         ),
@@ -219,12 +226,12 @@ class _HomePageState extends State<HomePage> {
                     ),
                     SizedBox(height: 0.015 * pgHeight),
                     Text(
-                      'Estimated fuel needed: ${fuelNeeded.toStringAsFixed(2)} litres',
+                      'Fuel needed: ${fuelNeeded.toStringAsFixed(2)} litres',
                       style: TextStyle(fontSize: 0.02 * pgHeight),
                     ),
                     SizedBox(height: 0.015 * pgHeight),
                     Text(
-                      'Estimated Cost: RM ${cost.toStringAsFixed(2)}',
+                      'Cost: RM ${cost.toStringAsFixed(2)}',
                       style: TextStyle(fontSize: 0.02 * pgHeight),
                     ),
                   ],
