@@ -35,7 +35,6 @@ class MainApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color.fromARGB(255, 253, 158, 14),
         appBarTheme: const AppBarTheme(
           centerTitle: true,
-          toolbarHeight: 100,
           backgroundColor: Color.fromARGB(255, 253, 133, 14),
           shadowColor: Colors.black,
           elevation: 5,

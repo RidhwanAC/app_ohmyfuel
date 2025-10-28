@@ -9,8 +9,8 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  late double pgWidth = MediaQuery.of(context).size.width;
-  late double pgHeight = MediaQuery.of(context).size.height;
+  late double pgWidth;
+  late double pgHeight;
 
   @override
   void initState() {
@@ -23,6 +23,8 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
+    pgWidth = MediaQuery.of(context).size.width;
+    pgHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Center(
         child: Column(

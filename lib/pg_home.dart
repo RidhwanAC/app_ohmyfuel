@@ -9,8 +9,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late double pgWidth = MediaQuery.of(context).size.width;
-  late double pgHeight = MediaQuery.of(context).size.height;
+  late double pgWidth;
+  late double pgHeight;
 
   TextEditingController distanceController = TextEditingController();
   TextEditingController efficiencyController = TextEditingController();
@@ -31,9 +31,18 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    pgWidth = MediaQuery.of(context).size.width;
+    pgHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Oh My Fuel!'),
+        toolbarHeight: 0.1 * pgHeight,
+        title: Text(
+          'Oh My Fuel!',
+          style: TextStyle(
+            fontSize: 0.04 * pgHeight,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: SafeArea(
         top: true,
@@ -44,8 +53,8 @@ class _HomePageState extends State<HomePage> {
               child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.all(20.0),
-                margin: const EdgeInsets.all(40.0),
+                padding: EdgeInsets.all(0.025 * pgHeight),
+                margin: EdgeInsets.all(0.05 * pgHeight),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(15.0),
@@ -87,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: 0.025 * pgHeight),
                     MyTextField(
                       controller: efficiencyController,
                       labelText: 'Efficiency (km/l)',
@@ -120,12 +129,17 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: 0.025 * pgHeight),
                     Row(
                       children: [
-                        const Text('Select Fuel: ',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        const SizedBox(width: 10),
+                        Text(
+                          'Select Fuel: ',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 0.02 * pgHeight,
+                          ),
+                        ),
+                        SizedBox(width: 0.025 * pgWidth),
                         DropdownButton<String>(
                           value: selectedFuel,
                           items: fuelPrices.keys.map((String value) {
@@ -142,17 +156,37 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 40),
+                    SizedBox(height: 0.05 * pgHeight),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         ElevatedButton(
                           onPressed: _calculate,
-                          child: const Text('Calculate'),
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.fromLTRB(
+                                0.04 * pgWidth,
+                                0.015 * pgHeight,
+                                0.04 * pgWidth,
+                                0.015 * pgHeight),
+                          ),
+                          child: Text(
+                            'Calculate',
+                            style: TextStyle(fontSize: 0.02 * pgHeight),
+                          ),
                         ),
                         ElevatedButton(
                           onPressed: _clear,
-                          child: const Text('Reset'),
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.fromLTRB(
+                                0.04 * pgWidth,
+                                0.015 * pgHeight,
+                                0.04 * pgWidth,
+                                0.015 * pgHeight),
+                          ),
+                          child: Text(
+                            'Reset',
+                            style: TextStyle(fontSize: 0.02 * pgHeight),
+                          ),
                         ),
                       ],
                     ),
@@ -161,11 +195,12 @@ class _HomePageState extends State<HomePage> {
               ),
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(20.0),
-                margin: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+                padding: EdgeInsets.all(0.025 * pgHeight),
+                margin:
+                    EdgeInsets.fromLTRB(0.05 * pgHeight, 0, 0.05 * pgHeight, 0),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(15.0),
+                  borderRadius: BorderRadius.circular(0.02 * pgHeight),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.6),
@@ -179,12 +214,19 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                        'Selected Fuel Price: ${fuelPrices[selectedFuel]?.toStringAsFixed(2)} RM/litre'),
-                    const SizedBox(height: 10),
+                      'Selected Fuel Price: ${fuelPrices[selectedFuel]?.toStringAsFixed(2)} RM/litre',
+                      style: TextStyle(fontSize: 0.02 * pgHeight),
+                    ),
+                    SizedBox(height: 0.015 * pgHeight),
                     Text(
-                        'Estimated fuel needed: ${fuelNeeded.toStringAsFixed(2)} litres'),
-                    const SizedBox(height: 10),
-                    Text('Estimated Cost: RM ${cost.toStringAsFixed(2)}'),
+                      'Estimated fuel needed: ${fuelNeeded.toStringAsFixed(2)} litres',
+                      style: TextStyle(fontSize: 0.02 * pgHeight),
+                    ),
+                    SizedBox(height: 0.015 * pgHeight),
+                    Text(
+                      'Estimated Cost: RM ${cost.toStringAsFixed(2)}',
+                      style: TextStyle(fontSize: 0.02 * pgHeight),
+                    ),
                   ],
                 ),
               )
